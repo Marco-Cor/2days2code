@@ -1,0 +1,124 @@
+WManager:
+	Main:
+	bidoni:
+	MappaBidoni:
+
+<Main>:
+	name: "main_screen"
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "Trova bidone libero:"
+			size_hint: 1, .2
+		GridLayout:
+			cols: 2
+			rows: 3
+			Button:
+				text: "plastica"
+				on_press:
+					root.trova_bidone(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "carta"
+				on_press:
+					root.trova_bidone(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "vetro"
+				on_press:
+					root.trova_bidone(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "indifferenziata"
+				on_press:
+					root.trova_bidone(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "organico"
+				on_press:
+					root.trova_bidone(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "tutti i bidoni"
+				on_press:
+					root.trova_bidone(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+		Button:
+			text: "visualizza mappa bidoni"
+			size_hint: 1, .2
+			on_press:
+				app.root.current = "mappa_screen"
+				root.manager.transition.direction = "left"
+
+
+<bidoni>:
+	name: "bidoni_screen"
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "bidoni nelle vicinanze"
+			size_hint: 1, .2
+		BoxLayout:
+			cols: 2
+			size_hint: 1, .2
+			Label:
+				text: "VIA"
+			Label:
+				text: "STATO"
+		ScrollView:
+			GridLayout:
+				id: lista_bidoni_disp
+				cols: 2
+				size_hint_y: None
+				row_default_height: root.height*0.2
+				height: self.minimum_height
+		BoxLayout:
+			size_hint: 1, .2
+			Button:
+				text: "indietro"
+				on_press:
+					app.root.current = "main_screen"
+					root.manager.transition.direction = "right"
+
+<MappaBidoni>:
+	name: "mappa_screen"
+	id_mappa: id_mappa
+	GridLayout:
+		rows: 2
+		MapView:
+			lat: 41
+			lon: 16
+			zoom: 8
+			double_tap_zoom: True
+			id: id_mappa
+		Button:
+			text: "Indietro"
+			size_hint: 1, .1
+			on_press:
+				app.root.current = "main_screen"
+				root.manager.transition.direction = "right"
+
+# Casi di errore
+<Err_no_gps>:
+	Label:
+		text: "Impossibile determinare la tua posizione\nattivare il gps e riavviare l'app per utilizzare:\n''calcola percorso migliore''\n(utilizzo una posizione attuale casuale\nper testing in questo caso)"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}
+
+<Err_no_internet>:
+	Label:
+		text: "Impossibile connettersi, attivare internet e riavviare l'app"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}
+
+<Err_no_bidoni_pieni>:
+	Label:
+		text: "Impossibile trovare bidoni non pieni"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}

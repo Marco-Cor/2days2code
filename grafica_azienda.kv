@@ -1,0 +1,171 @@
+WManager:
+	Main:
+	bidoni:
+	Percorso:
+	MappaPercorso:
+
+<Main>:
+	name: "main_screen"
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "Trova bidoni pieni da svuotare:"
+			size_hint: 1, .2
+		GridLayout:
+			cols: 2
+			rows: 4
+			Button:
+				text: "plastica"
+				# background_color: 1, .97, .09, 1
+				on_press:
+					root.prendi_testo_btn_cliccato(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "carta"
+				# background_color: 0, 0, 1, 1
+				on_press:
+					root.prendi_testo_btn_cliccato(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "vetro"
+				# background_color: .01, .99, .69, 1
+				on_press:
+					root.prendi_testo_btn_cliccato(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "indifferenziata"
+				# background_color: .05, .05, .05, 1
+				on_press:
+					root.prendi_testo_btn_cliccato(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "organico"
+				# background_color: .4, .3, .02, 1
+				on_press:
+					root.prendi_testo_btn_cliccato(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+			Button:
+				text: "tutti i bidoni\npieni"
+				size_hint: 1, .2
+				on_press:
+					root.prendi_testo_btn_cliccato(self)
+					app.root.current = "bidoni_screen"
+					root.manager.transition.direction = "left"
+		Button:
+			text: "tutti i bidoni"
+			size_hint: 1, .25
+			on_press:
+				root.prendi_testo_btn_cliccato(self)
+				app.root.current = "bidoni_screen"
+				root.manager.transition.direction = "left"
+		Button:
+			text: "Calcola percorso migliore"
+			size_hint: 1, .25
+			on_press: 
+				app.root.current = "percorso_screen"
+				root.manager.transition.direction = "left"
+
+<bidoni>:
+	name: "bidoni_screen"
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "bidoni nelle vicinanze"
+			size_hint: 1, .2
+		BoxLayout:
+			cols: 2
+			size_hint: 1, .2
+			Label:
+				text: "VIA"
+			Label:
+				text: "STATO"
+		ScrollView:
+			GridLayout:
+				id: lista_bidoni_disp
+				cols: 2
+				size_hint_y: None
+				row_default_height: root.height*0.2
+				height: self.minimum_height
+		BoxLayout:
+			size_hint: 1, .2
+			Button:
+				text: "indietro"
+				on_press:
+					app.root.current = "main_screen"
+					root.manager.transition.direction = "right"
+
+<Percorso>:
+	name: "percorso_screen"
+	id_percorso: id_percorso
+	GridLayout:
+		id: "grid_percorso"
+		rows: 2
+		cols: 2
+		Label:
+			text: "Percorso:"
+			size_hint: 1, .2
+		Label:
+			id: id_percorso
+			text: ""
+		Button:
+			text: "indietro"
+			size_hint: 1, .2
+			on_press:
+				app.root.current = "main_screen"
+				root.manager.transition.direction = "right"
+		Button:
+			text: "visualizza mappa"
+			size_hint: 1, .2
+			on_press:
+				app.root.current = "mappa_screen"
+				root.manager.transition.direction = "left"
+
+<MappaPercorso>:
+	name: "mappa_screen"
+	id_mappa: id_mappa
+	grid_id: grid_id
+	GridLayout:
+		id: grid_id
+		rows: 2
+		MapView:
+			lat: 41
+			lon: 16
+			zoom: 8
+			double_tap_zoom: True
+			id: id_mappa
+		Button:
+			text: "Indietro"
+			size_hint: 1, .1
+			on_press:
+				app.root.current = "percorso_screen"
+				root.manager.transition.direction = "right"
+
+# Casi di errore
+<Err_no_internet>:
+	Label:
+		text: "Impossibile connettersi, attivare internet e riavviare l'app"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}
+
+<Err_no_bidoni_pieni>:
+	Label:
+		text: "Impossibile trovare bidoni da svuotare"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}
+
+<Err_no_bidoni_vuoti>:
+	Label:
+		text: "Impossibile trovare bidoni non pieni"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}
+
+<Err_no_gps>:
+	Label:
+		text: "Impossibile determinare la tua posizione\nattivare il gps e riavviare l'app per utilizzare:\n''calcola percorso migliore''\n(utilizzo una posizione attuale casuale\nper testing in questo caso)"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}

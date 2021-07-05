@@ -1,0 +1,57 @@
+WManager:
+	Main:
+	Gps_s:
+
+<Main>:
+	name: "main_screen"
+	Button:
+		text: "Vai al gps"
+		on_press:
+			app.root.current = "gps_screen"
+			root.manager.transition.direction = "left"
+
+<Gps_s>:
+	name: "gps_screen"
+	pos_att: pos_att
+	lon_att: lon_att
+	lat_att: lat_att
+	GridLayout:
+		rows: 2
+		cols: 1
+		GridLayout:
+			cols: 2
+			rows: 3
+			Label:
+				text: "posizione attuale"
+			Label:
+				id: pos_att
+				text: ""
+			Label:
+				text: "longitudine attuale"
+			Label:
+				id: lon_att
+				text: ""
+			Label:
+				text: "latitudine attuale"
+			Label:
+				id: lat_att
+				text: ""
+		Button:
+			text: "indietro"
+			size_hint: 1, .2
+			on_press:
+				app.root.current = "main_screen"
+				root.manager.transition.direction = "right"
+
+<Err_no_gps>:
+	Label:
+		text: "Impossibile determinare la tua posizione\nattivare il gps e riavviare l'app se sei su telefono"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}
+
+# Casi di errori
+<Err_no_internet>:
+	Label:
+		text: "Impossibile connettersi, attivare internet e riavviare l'app"
+		size_hint: 0.6, 0.2
+		pos_hint: {"x":0.2, "top":1}
