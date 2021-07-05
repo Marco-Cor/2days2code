@@ -165,9 +165,9 @@ def controlla_connessione_internet():
 		return False
 
 # Qua genero dati casuali per riempire il database
-# Usando un sensore per ogni bidone di un determinato luogo si possono ricavare gli stessi dati
-# id, tipo_rifiuto e posizione (indica la via) sarebbero messi manualmente
-# perc_riempimento (% di riempimento), data_riempimento (assume un valore nel momento in cui tipo_rifiuto raggiunge il 100%) e ora_riempimento (stesso vincolo di data_riempimento)
+# Usando un sensore per ogni bidone si possono ricavare gli stessi dati
+# id, tipo_rifiuto e via sarebbero messi manualmente
+# perc_riempimento, data_riempimento (assume un valore nel momento in cui tipo_rifiuto raggiunge il 100%) e ora_riempimento (stesso vincolo di data_riempimento)
 # ^ saranno determinati dai dati forniti dal sensore del bidone e aggiornati in tempo reale
 def popola_db():
 	i = 0
